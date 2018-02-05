@@ -43,7 +43,7 @@ for i in min_values:
     if crt_euro < i:
         answer = "BUYYYYYYYYYYYYYYYYYY"
 msg = "\r\n".join([eur, vars, min_list, ])
-print msg
+#print msg
 
 
 def send_email(user, pwd, recipient, subject, body):
@@ -70,4 +70,4 @@ def send_email(user, pwd, recipient, subject, body):
         print "failed to send mail"
 
 to_list = ["salexcme@gmail.com", "octavian.ciuca@gmail.com"]
-# send_email("alexrinf", "4Testing", to_list , "CURS EURO", msg)
+send_email("alexrinf", "4Testing", to_list , "CURS EURO", msg)
