@@ -37,7 +37,7 @@ for i in range(1, len(all_trs)):
 
 
 eur = "Curs euro: " + crt_euro
-vars = "A scazut cu: " + variation.split(" ")[0]
+vars = "Delta: " + variation.split(" ")[0]
 min_list = "Valori minime: " + str(min_values)
 for i in min_values:
     if crt_euro < i:
