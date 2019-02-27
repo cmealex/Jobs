@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from urllib2 import urlopen as ureq
 from bs4 import BeautifulSoup as soup
 myUrl = "https://www.cursbnr.ro/"
 
-uClient = ureq(myUrl)
-raw_page = uClient.read()
-uClient.close()
+import requests
 
-soup_page = soup(raw_page, "html.parser")
+url = 'http://france.meteofrance.com/france/meteo?PREVISIONS_PORTLET.path=previsionsville/750560'
+page = requests.get(myUrl)
+
+soup_page = soup(page.text, "html.parser")
 
 cont1 = soup_page.find_all("div", {"class": "currency-value"})
 for i in cont1:
@@ -18,7 +18,7 @@ for i in cont1:
         crt_euro = str(crt_euro_full).split("=")[1].replace(" Lei", "").strip()
 
 
-cont2 = soup_page.find("p", text="Valori minime și maxime pe ultimele 3 luni")
+cont2 = soup_page.find_all('p')[4]
 table = cont2.find_next_sibling('table')
 all_trs = table.find_all("tr")
 ind = 0
@@ -39,8 +39,8 @@ for i in range(1, len(all_trs)):
 eur = "Curs euro: " + crt_euro
 vars = "Delta: " + variation.split(" ")[0]
 min_list = "Valori minime: " + str(min_values)
-for i in min_values:
-    if crt_euro < i:
+for value in min_values:
+    if value > float(crt_euro):
         answer = "BUYYYYYYYYYYYYYYYYYY"
 msg = "\r\n".join([eur, vars, min_list, ])
 #print msg
@@ -65,9 +65,9 @@ def send_email(user, pwd, recipient, subject, body):
         server.login(gmail_user, gmail_pwd)
         server.sendmail(FROM, TO, message)
         server.close()
-        print 'successfully sent the mail'
+        print('successfully sent the mail')
     except:
-        print "failed to send mail"
+        print("failed to send mail")
 
-to_list = ["salexcme@gmail.com", "octavian.ciuca@gmail.com"]
+to_list = ["salexcme@gmail.com"]
 send_email("alexrinf", "4Testing", to_list , "CURS EURO", msg)
