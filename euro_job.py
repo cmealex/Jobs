@@ -70,4 +70,4 @@ def send_email(user, pwd, recipient, subject, body):
         print("failed to send mail")
 
 to_list = ["salexcme@gmail.com"]
-send_email("alexrinf", "4Testing", to_list , "CURS EURO", msg)
+send_email("alexrinf", "pass4T", to_list , "CURS EURO", msg)
